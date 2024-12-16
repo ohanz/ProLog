@@ -5,6 +5,7 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ob_start();
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -17,9 +18,14 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
             // header('Location: dashboard.php');
+            // exit("Redirecting to dashboard...");
             // echo '<script>window.location.href = "../public/dashboard.php";</script>';
+//             echo '<script>window.location.href = "dashboard.php";</script>';
+// exit;
+ob_end_flush();
+echo '<meta http-equiv="refresh" content="0; url=test.php">';
             echo "Login successful!";
-            exit;
+            // exit;
         } else {
             echo "Invalid username or password";
         }
