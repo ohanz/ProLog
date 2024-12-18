@@ -1,19 +1,35 @@
 <?php
 require_once 'config.php';
-echo "Dashboard page loaded!";
+ob_start();
 
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php');
-    exit;
+ $hyper = $_SESSION['username'];
+if(isset($hyper) == null){
+ echo "<br/>"."[Hype error: Null session rectrieved]"."<br/>"."<br/>";
+ $hyper = "<b>"."Hyper def"."</b>";
 }
+else{
+      echo 'Eloo';
+}
+// if (isset($_SESSION['username'])) {
+//     echo 'Eloo';
+// }
+// else{
+//     // header('Location: login.php');
+//     // exit;
+// }
+
+ob_end_flush();
 ?>
 
 <html>
 <head>
-    <title>Ihype | Prolog Home</title>
+<title>Ihype | Prolog Home</title>
 </head>
 <body>
-    Welcome to Home, Your Dashboard!
-    <?php echo "Welcome, " . $_SESSION['username'] . "!"; ?>
+Welcome to Home, Your Dashboard!
+<?php
+echo "<br/>"."<br/>"."Dashboard Page Loaded! ";
+echo "Welcome, " . $hyper . "!";
+?>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -10,18 +11,20 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT * FROM hypers WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
+    $query = "SELECT * FROM hypers WHERE username = '$username'";
+    $result = $conn->query($query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
-            var_dump($_SESSION);
-            ob_end_clean();
-            header('Location: dashboard.php', true, 302);
+            header('Location: dashboard.php');
+            // exit("Redirecting to dashboard...");
+            // echo '<script>window.location.href = "../public/dashboard.php";</script>';
+//             echo '<script>window.location.href = "dashboard.php";</script>';
+// exit;
+ob_end_flush();
+// echo '<meta http-equiv="refresh" content="0; url=test.php">';
+            // echo "Login successful!";
             exit;
         } else {
             echo "Invalid username or password";
