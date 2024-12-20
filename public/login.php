@@ -32,10 +32,17 @@ if (isset($_POST['login'])) {
 }
 ?>
 
+<html>
+    <head>
+        <title>Ihype | ProLog Login</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 <form action="login.php" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username"><br><br>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password"><br><br>
-    <input type="submit" name="login" value="Login">
+    <input type="submit" name="login" value="Login Now">
+    <a href="signup.php"><input type="button" name="register" value="Sign Up"></a>
 </form>
+</html>

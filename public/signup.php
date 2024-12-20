@@ -32,6 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<html>
+    <head>
+        <title>Ihype | ProLog Sign Up</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username"><br><br>
@@ -42,4 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" id="confirm_password" name="confirm_password"><br><br>
     <input type="submit" value="Sign Up">
+    <a href="login.php"><input type="button" name="logins" value="Login Instead"></a>
 </form>
+</html>
