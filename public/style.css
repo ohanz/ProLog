@@ -5,4 +5,6 @@ body{
 body.bodyy{font-size: 25px;}
 input{width:15%; height: 2rem;}
 .error{color: rgb(213, 21, 21); font-style: italic;}
+.error-not{color: rgb(213, 21, 21); font-size: 18px;}
+.errorHead{color: rgb(213, 21, 21); font-weight: bold; margin-bottom: 5px;}
 div{margin: 10px;}
