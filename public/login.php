@@ -9,6 +9,7 @@ ob_start();
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $AliErr = "";
 
     $stmt = $conn->prepare("SELECT * FROM hypers WHERE username = ?");
     $stmt->bind_param("s", $username);
@@ -24,10 +25,10 @@ if (isset($_POST['login'])) {
             header('Location: dashboard.php', true, 302);
             exit;
         } else {
-            echo "Invalid username or password";
+            $AliErr= "Invalid username or password";
         }
     } else {
-        echo "Invalid username or password";
+        $AliErr= "Invalid username or password";
     }
 }
 ?>
@@ -38,6 +39,8 @@ if (isset($_POST['login'])) {
         <link rel="stylesheet" href="style.css">
     </head>
 <form action="login.php" method="post">
+<p><span class="error-not">* Required field!</span></p>
+    <p><div class="error"><?php echo $AliErr; ?></div>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username"><br><br>
     <label for="password">Password:</label>

@@ -6,7 +6,7 @@ session_start(); // resolved session bug
  $hyper = $_SESSION['username'];
 if(isset($hyper) == null || empty($hyper)){
  echo "<br/>"."[Hype error: Null session rectrieved]"."<br/>"."<br/>";
- $hyper = "<b>"."Hyper def"."</b>";
+//  $hyper = "<b>"."Hyper def"."</b>";
  
 //  header('Location: login.php');
 //  exit;
@@ -27,9 +27,15 @@ ob_end_flush();
 Welcome to Home, Your Dashboard!
 <?php
 echo "<br/>"."<br/>"."Dashboard Page Loaded! ";
+if(isset($hyper)){
 echo "Welcome, "."<b>" . $hyper . "!"."</b>";
+}
+else{
+ echo "<b>"."YOU'RE NOT LOGGED IN!";
+}
+
 ?>
 
-<div></div>
+<footer>Bored? <a href="logout.php">Logout Here!</a></footer>
 </body>
 </html>
