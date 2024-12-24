@@ -31,6 +31,7 @@ if (isset($_POST['login'])) {
         $AliErr= "Invalid username or password";
     }
 }
+# To Avoid Php Error in global variable. Consider placing php-script in body instead.
 ?>
 
 <html>

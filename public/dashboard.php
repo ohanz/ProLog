@@ -35,6 +35,9 @@ else{
 }
 
 ?>
+<section class="header">
+      <div><a href="profile.php">View Profile</a><div>
+</section>
 
 <footer>Bored? <a href="logout.php">Logout Here!</a></footer>
 </body>
