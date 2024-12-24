@@ -28,17 +28,18 @@ if (isset($_POST['recover'])) {
       $mail = new PHPMailer(true);
       try {
           // Server settings
-          $mail->SMTPDebug = 2;
+          $mail->SMTPDebug = 0;
+          $mail->DebugOutput = '';
           $mail->isSMTP();
-          $mail->Host = 'your smtp host';
+          $mail->Host = 'smtp host';
           $mail->SMTPAuth = true;
-          $mail->Username = 'smtp username';
-          $mail->Password = 'smtp pass';
+          $mail->Username = 'Smtp Email username';
+          $mail->Password = 'Smtp Email password';
           $mail->SMTPSecure = 'tls';
           $mail->Port = 587;
 
           // Recipients
-          $mail->setFrom('your mail', 'Ohanz@prolog');
+          $mail->setFrom('your email', 'Ohanz@prolog');
           $mail->addAddress($email);
 
           // Content
