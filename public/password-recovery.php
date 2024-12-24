@@ -15,57 +15,45 @@ if (isset($_POST['recover'])) {
   $result = $stmt->get_result();
 
   if ($result->num_rows > 0) {
-    // Generate password reset token
-    $token = bin2hex(random_bytes(16));
+      // Generate password reset token
+      $token = bin2hex(random_bytes(16));
 
-    // Update user's password reset token in database
-    $stmt = $conn->prepare("UPDATE hypers SET password_reset_token = ? WHERE email = ?");
-    $stmt->bind_param("ss", $token, $email);
-    $stmt->execute();
+      // Update user's password reset token in database
+      $stmt = $conn->prepare("UPDATE hypers SET password_reset_token = ? WHERE email = ?");
+      $stmt->bind_param("ss", $token, $email);
+      $stmt->execute();
 
-    // Send password recovery email
-    // $to = $email;
-    // $subject = "Password Recovery";
-    // $message = "Click the link to reset your password: <a href='password-reset.php?token=$token'>Reset Password</a>";
-    // $headers = "From: hypercoderd@gmail.com\r\n";
-    // mail($to, $subject, $message, $headers);
-    // //  your-email@example.com
-  //   echo "Password recovery email sent!";
-  // } else {
-  //   echo "Email not found!";
-  // }
+      // Send password recovery email
+      require '../vendor/autoload.php';
+      $mail = new PHPMailer(true);
+      try {
+          // Server settings
+          $mail->SMTPDebug = 2;
+          $mail->isSMTP();
+          $mail->Host = 'your smtp host';
+          $mail->SMTPAuth = true;
+          $mail->Username = 'smtp username';
+          $mail->Password = 'smtp pass';
+          $mail->SMTPSecure = 'tls';
+          $mail->Port = 587;
 
-require '../vendor/autoload.php';
+          // Recipients
+          $mail->setFrom('your mail', 'Ohanz@prolog');
+          $mail->addAddress($email);
 
-$mail = new PHPMailer(true);
+          // Content
+          $mail->isHTML(true);
+          $mail->Subject = 'Password Recovery';
+          $mail->Body = 'Click the link to reset your password: <a href="http://localhost/ProLog/public/password-reset.php?token=' . $token . '">Reset Password</a>';
 
-try {
-    //Server settings
-    $mail->SMTPDebug = 2; // Enable verbose debug output
-    $mail->isSMTP(); // Set mailer to use SMTP
-    $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-    $mail->SMTPAuth = true; // Enable SMTP authentication
-    $mail->Username = ''; // SMTP username
-    $mail->Password = ''; // SMTP password
-    $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587; // TCP port to connect to
-
-    //Recipients
-    $mail->setFrom('hypercoderd@gmail.com', 'Ohanz@prolog');
-    $mail->addAddress($email); // Add a recipient
-
-    //Content
-    $mail->isHTML(true); // Set email format to HTML
-    $mail->Subject = 'Password Recovery';
-    $mail->Body = 'Click the link to reset your password: <a href="password-reset.php?token=' . $token . '">Reset Password</a>';
-
-    $mail->send();
-    echo 'Password recovery email sent!';
-} catch (Exception $e) {
-    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-}
-
-}
+          $mail->send();
+          echo 'Password recovery email sent!';
+      } catch (Exception $e) {
+          echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+      }
+  } else {
+      echo "Email not found!";
+  }
 }
 ?>
 <html>

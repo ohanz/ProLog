@@ -45,7 +45,8 @@ if (isset($_POST['reset'])) {
   } else {
     // Update user's password in database
     $stmt = $conn->prepare("UPDATE hypers SET password = ? WHERE password_reset_token = ?");
-    $stmt->bind_param("ss", password_hash($password, PASSWORD_DEFAULT), $token);
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $stmt->bind_param("ss", $hashed_password, $token);
     $stmt->execute();
 
     // Remove password reset token from database
