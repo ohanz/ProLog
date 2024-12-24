@@ -39,6 +39,7 @@ if (isset($_POST['login'])) {
         <title>Ihype | ProLog Login</title>
         <link rel="stylesheet" href="style.css">
     </head>
+    <body>
 <form action="login.php" method="post">
 <p><span class="error-not">* Required field!</span></p>
     <p><div class="error"><?php echo $AliErr; ?></div>
@@ -49,4 +50,5 @@ if (isset($_POST['login'])) {
     <input type="submit" name="login" value="Login Now">
     <a href="signup.php"><input type="button" name="register" value="Sign Up"></a>
 </form>
+</body>
 </html>

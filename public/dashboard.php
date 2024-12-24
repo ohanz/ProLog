@@ -5,7 +5,7 @@ session_start(); // resolved session bug
 
  $hyper = $_SESSION['username'];
 if(isset($hyper) == null || empty($hyper)){
- echo "<br/>"."[Hype error: Null session rectrieved]"."<br/>"."<br/>";
+ echo "<br/>"."[Hype error: Null session retrieved]"."<br/>"."<br/>";
 //  $hyper = "<b>"."Hyper def"."</b>";
  
 //  header('Location: login.php');

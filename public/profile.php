@@ -18,7 +18,12 @@ $row = $result->fetch_assoc();
 
 // Display user profile information
 ?>
-
+<html>
+<head>
+<title>Ihype | Prolog Profile</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 <form action="profile.php" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" value="<?php echo $row['username']; ?>"><br><br>
@@ -26,6 +31,11 @@ $row = $result->fetch_assoc();
     <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>"><br><br>
     <input type="submit" name="update" value="Update Profile">
 </form>
+<br /> <br />
+Click Here If <a href="password-recovery.php"><input type="button" value="Forgot Password"></a>
+</body>
+</html>
+
 
 <?php
 // Update user profile information
